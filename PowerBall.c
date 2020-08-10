@@ -12,8 +12,9 @@ int main()
 {
 int lottoball[COUNT];
 int redlottoball[REDCOUNT];
-int x, y, draw, b, c;
+int x, y, draw, draw2, b, c;
 draw = 0;
+draw2=0;
 /*seed the randomizer*/
 srand((unsigned)time(NULL));
 
@@ -39,11 +40,18 @@ while(draw<BALLS)
 		draw++;
 	}
 }
-c = rand() % REDCOUNT;
-
-redlottoball[c] =1;
-
-
+while(draw2<REDBALLS)
+{
+	/*generate a random number */
+	c = rand() % REDCOUNT;
+	/*confirm that it hasn't yet been drawn*/
+	if(redlottoball[c] ==0)
+	{
+		/*mark the ball as drawn*/
+		redlottoball[c]=1;
+		draw2++;
+	}
+}
 puts("Wining Lotto Numbers:");
 
 for(x=0; x<COUNT; x++)
@@ -54,7 +62,14 @@ for(x=0; x<COUNT; x++)
 	}
 }
 
-printf("%3d", redlottoball[c]);
+for(y=0; y<REDCOUNT; y++)
+{
+	if(redlottoball[y] ==1)
+	{
+		printf("%3d", y+1);
+	}
+}
+
 putchar('\n');
 
 }
